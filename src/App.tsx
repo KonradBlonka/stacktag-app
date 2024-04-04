@@ -1,10 +1,6 @@
 import fetchData from "@/api/api_functions";
 import { Item } from "@/types/interface";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import CardTag from "./components/CardTag";
-import { Button } from "./components/ui/button";
-// import { Input } from './components/ui/input';
 import {
   AlertCircle,
   GalleryVertical,
@@ -12,9 +8,12 @@ import {
   MoveUp,
   TableProperties,
 } from "lucide-react";
+import { useState } from "react";
+import CardTag from "./components/CardTag";
 import ListTag from "./components/ListTag";
 import TableListTag from "./components/TableListTag";
 import { Alert, AlertTitle } from "./components/ui/alert";
+import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "./components/ui/toggle-group";
 
@@ -23,10 +22,10 @@ function App() {
   const [page, setPage] = useState(1);
   const [order, setOrder] = useState("asc");
   const [sort, setSort] = useState("name");
-  const [size, setSize] = useState(9);
+  const [size, setSize] = useState(15);
   const [sizeInput, setSizeInput] = useState("");
   const [inputError, setInputError] = useState(false);
-  const [contentChoose, setContentChoose] = useState(false);
+  const [contentChoose, setContentChoose] = useState(true);
 
   const { data, isPending, error, isError, isPlaceholderData } = useQuery({
     queryKey: ["Tags", page, order, sort, size],
@@ -109,27 +108,6 @@ function App() {
     return <ListTag key={tag.name} item={tag} />;
   });
 
-  // const ListContent = () => {
-  //   return (
-  //     <Table className="bg-white">
-  //       <TableHeader>
-  //         <TableRow>
-  //           <TableHead>Name</TableHead>
-  //           <TableHead>Count</TableHead>
-  //         </TableRow>
-  //       </TableHeader>
-  //       <TableBody>
-  //         {(data?.items as Item[])?.map((tag) => (
-  //           <TableRow key={tag.name}>
-  //             <TableCell>{tag.name}</TableCell>
-  //             <TableCell>{tag.count}</TableCell>
-  //           </TableRow>
-  //         ))}
-  //       </TableBody>
-  //     </Table>
-  //   );
-  // };
-
   return (
     <>
       <div className=" flex flex-col items-center ">
@@ -175,17 +153,6 @@ function App() {
               defaultValue="false"
             >
               <ToggleGroupItem
-                value="pageContent"
-                className="border-white border-2"
-                disabled={contentChoose === false || isPlaceholderData}
-                onClick={() => setContentChoose(false)}
-              >
-                <div className="w-15 flex justify-center align-middle items-center">
-                  List
-                  <TableProperties className="ml-3" size={15} strokeWidth={3} />
-                </div>
-              </ToggleGroupItem>
-              <ToggleGroupItem
                 value="listContent"
                 className="border-white border-2"
                 disabled={contentChoose === true || isPlaceholderData}
@@ -194,6 +161,17 @@ function App() {
                 <div className="w-15 flex justify-center align-middle items-center">
                   Cards
                   <GalleryVertical className="ml-1" size={15} strokeWidth={3} />
+                </div>
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                value="pageContent"
+                className="border-white border-2"
+                disabled={contentChoose === false || isPlaceholderData}
+                onClick={() => setContentChoose(false)}
+              >
+                <div className="w-15 flex justify-center align-middle items-center">
+                  List
+                  <TableProperties className="ml-3" size={15} strokeWidth={3} />
                 </div>
               </ToggleGroupItem>
             </ToggleGroup>

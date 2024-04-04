@@ -2,7 +2,7 @@ const fetchData = async (
   { pageParam = 1 }: { pageParam: number },
   { pageOrder = "" }: { pageOrder: string },
   { sortPage = "" }: { sortPage: string },
-  { pageSize = 9 }: { pageSize: number }
+  { pageSize = 15 }: { pageSize: number }
 ) => {
   try {
     const res = await fetch(
