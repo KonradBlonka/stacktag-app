@@ -1,30 +1,35 @@
-# React + TypeScript + Vite
+# MEDIPORTA - Zadanie rekrutacyjne Junior React Developer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Do napisania programu użyto Vite, Typescript, React, TailwindCSS
 
-Currently, two official plugins are available:
+Do zainstelowania programu (uruchamianie jak w treści zadania):
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- skopiować repozytorium
+- "npm ci"
+- "npm start" do włączenia programu
+- "npm run storybook" do włączenia Storybook
 
-## Expanding the ESLint configuration
+## Program
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Tagi są ściągane z API StackOverflow.
 
-- Configure the top-level `parserOptions` property like this:
+Użytkownik może wybrać w jaki sposób mają zostać pokazane tagi: tabela lub siatka kart.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Tagi można sortować na 6 sposobów:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Name - alfabetycznie (ASC: od A-Z, DESC: od Z-A)
+- Popular: ze względu na popularność (ASC: najmniej znane, DESC: najpopularniejsze)
+- Activity: od daty wysłania ostatniego zapytania z danym tagiem (ASC: od najstarszych, DESC: od najnowszych)
+  Zmiana sortowania ustawia stronę na pierwszą. Można także wybierać kolejne strony za pomocą 'Next' i Previous'
+
+Liczba elementów jest konfigurowana przez pole liczbową nad tabelą.
+Użyto restrykcji by użytkownik nie miał błędu związanego z ściąganiem zbyt dużej ilości danych z API.
+Liczbę elementów na stronie można ustawić od 1 do 100.
+
+Przygotowano odpowiednie stany dla etapu ładowania danych i błędów przy pobieraniu.
+
+Do gotowych komponentów użyto Shadcn.
+
+Do zarządzania stanem i pobieraniem danych użyto biblioteki react-query (obecnie TanStack Query v5)
+
+Stworzono Storybook, który tylko przedstawia komponenty. Nie udało się zrealizować interakcji między komponentami.
